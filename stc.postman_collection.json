@@ -1,0 +1,214 @@
+{
+	"info": {
+		"_postman_id": "e1eeb918-fbb8-4e48-a7e1-ee1305308044",
+		"name": "stc",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createSpace",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "email",
+						"value": "efg@google.com",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"Space\",\r\n    \"name\": \"admiral-assessments\",\r\n\t\"permissionGroup\":{\r\n\t\t\"groupName\": \"user\"\r\n\t\t\r\n\t},\r\n\t\r\n    \"item\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/api/createSpace",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"createSpace"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "viewFile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "email",
+						"value": "efg@google.com",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/api/viewFile/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"viewFile",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "downloadFile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "email",
+						"value": "efg@google.com",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/api/downloadFile/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"downloadFile",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createFolder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "email",
+						"value": "efg@google.com",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"Folder\",\r\n    \"name\": \"backend\",\r\n\t\"permissionGroup\":{\r\n\t\t\"groupName\": \"admin\"\r\n\t\t\r\n\t},\r\n\t\r\n    \"item\": {\r\n    \"id\": 1,\r\n    \"type\": \"Space\",\r\n    \"name\": \"stc-assessments\",\r\n    \"permissionGroup\": {\r\n        \"id\": 1,\r\n        \"groupName\": \"admin\"\r\n    },\r\n    \"item\": null\r\n}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/api/createFolder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"createFolder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createFile",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "email",
+						"value": "efg@google.com",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"contentType": "",
+							"type": "file",
+							"src": "/D:/Companies/Digi-Vision/assessment.pdf"
+						},
+						{
+							"key": "item",
+							"value": "{\n    \"type\": \"File\",\n    \"name\": \"assessment.pdf\",\n\t\"permissionGroup\":{\n\t\t\"groupName\": \"admin\"\n\t\t\n\t},\n\t\n    \"item\": {\n    \"id\": 2,\n    \"type\": \"Folder\",\n    \"name\": \"backend\",\n    \"permissionGroup\": {\n        \"id\": 1,\n        \"groupName\": \"admin\"\n    },\n    \"item\": {\n        \"id\": 1,\n        \"type\": \"Space\",\n        \"name\": \"stc-assessments\",\n        \"permissionGroup\": {\n            \"id\": 1,\n            \"groupName\": \"admin\"\n        },\n        \"item\": null\n    }\n}\n}",
+							"contentType": "application/json",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/api/createFile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"createFile"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

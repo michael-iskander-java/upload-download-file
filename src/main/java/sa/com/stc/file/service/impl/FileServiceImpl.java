@@ -2,6 +2,7 @@ package sa.com.stc.file.service.impl;
 
 import java.io.IOException;
 import java.util.List;
+
 import java.util.Optional;
 import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -180,17 +181,27 @@ public class FileServiceImpl implements FileService {
 		Query q = entityManager.createNativeQuery(
 				"SELECT file.id, file.type, file.name as filName, folder.name as folderName, space.name as spaceName FROM item file, item folder, item space WHERE file.item_id = folder.id and folder.item_id = space.id and file.id = :fileId");
 		q.setParameter("fileId", fileId);
+		
+		
+		Optional<File> file = fileRepository.findByItem(fileId);
+		int fileSize = 0;
+		
+		if (file.isPresent()) {
+			fileSize = file.get().getBinaryFile().length;
+		}
+		
 		String result = "No files for id: "+fileId;
-		List results = q.getResultList();
+		
+		List files = q.getResultList();
 
-		if (results.size() > 0) {
-			Object[] file = (Object[]) results.get(0);
+		if (files.size() > 0) {
+			Object[] fileMeta = (Object[]) files.get(0);
 
-			if (ItemType.valueOf((String) file[1]) != ItemType.File) {
+			if (ItemType.valueOf((String) fileMeta[1]) != ItemType.File) {
 				throw new BusinessValidationException(ErrorReason.INVALID_ITEM);
 			}
 
-			result = "File Name: " + file[2] + "\n\tFolder Name: " + file[3] + "\n\t\tSpace Name: " + file[4];
+			result = "File Name: " + fileMeta[2] + "\n\tFolder Name: " + fileMeta[3] + "\n\t\tSpace Name: " + fileMeta[4]+ "\nFile Size: "+fileSize+" bytes";
 
 		}
 

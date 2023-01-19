@@ -57,8 +57,6 @@ public class FileUploadDownload {
 		return ResponseEntity.ok(fileService.viewFile(fileId, email));
 	}
 
-	// API to download file as a binary, making sure that the user has access on
-	// this file (Bonus API)
 	@GetMapping(path = "/downloadFile/{fileId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<byte[]> downLoadFile(@RequestHeader(name = "email") String email, @PathVariable Long fileId,
 			HttpServletRequest request) {
