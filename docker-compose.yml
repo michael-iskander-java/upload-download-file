@@ -1,0 +1,16 @@
+services:
+  database:
+    build:
+      context: ./docker/database
+      dockerfile: Dockerfile
+    image: 'my-postgres-image'
+    container_name: 'my-postgres-container'
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: filedb
+      HOSTIP: localhost   
+
+  
